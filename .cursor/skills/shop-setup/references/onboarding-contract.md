@@ -17,6 +17,28 @@ Intake → shop-plan → merchant-setup → catalog-design → login-setup → s
 The storefront step depends on the recorded build path (see
 [the build-path contract](../../shop-plan/references/build-path-contract.md)).
 
+## Intake
+
+Every value the flow needs is asked **once, in one message**, at the start of a fresh project —
+together with `shop-plan`'s criteria, so planning asks nothing new. Skip what the developer
+already stated, and show inferred values back instead of assuming them.
+
+| Group | Values | Used by |
+|---|---|---|
+| Game | name, platforms, an approved short description, store URL (optional), brand assets (optional) | catalog-design, storefront |
+| Account | merchant ID and project ID, or "no account yet" | merchant-setup |
+| Build path | `shop-plan`'s criteria | shop-plan |
+| Storefront | site slug or domain, primary locale and other locales, `update` or `create-new` for an existing site | storefront |
+| Catalog | what the game sells, or where the catalog is described | catalog-design |
+| Login | sign-in methods | login-setup |
+| Webhooks | the listener URL, or "none yet", and how goods are granted in the game | webhooks-impl |
+
+Values are written to the ledger when the developer confirms the plan, in the same step that
+records the build path. After that, every step reads them from the ledger. Ask again only for a
+value that is missing, that conflicts with what a step finds, that a destructive change needs,
+or that is an approval. A skill that asks for a value the ledger already holds gets it from the
+ledger, not from the developer.
+
 ## Statuses
 
 Every step carries exactly one:
@@ -57,7 +79,7 @@ verified stays out of `completed`.
 |---|---|
 | **File** | `.xsolla/onboarding.json` in the project root |
 | **Git** | Ignored: add `.xsolla/` to the project's `.gitignore` before the first write |
-| **Written by** | `shop-setup` only, and only after the developer confirmed the intake it records |
+| **Written by** | `shop-setup` only — first when the developer confirms the plan, which records the intake with it |
 | **Holds** | The intake values, the build path, and one entry per step. Never a secret — API keys, the webhook secret, and session values stay in `.env` and are referred to by name |
 
 ```json

@@ -107,9 +107,10 @@ open is how the storefront itself gets built, so five quick questions.
 
 ### 2. Ask the five criteria — one message
 
-Ask all five in a single message. Infer an answer only when the request already states it
-plainly (e.g. "embed this in my existing React app" answers custom UI *and* hosting) — but still
-show your inference back before moving on, so a wrong read gets caught immediately.
+Ask all five in a single message. If `shop-setup`'s intake already asked them, use those answers
+and do not ask again. Infer an answer only when the request already states it plainly (e.g.
+"embed this in my existing React app" answers custom UI *and* hosting) — but still show your
+inference back before moving on, so a wrong read gets caught immediately.
 
 1. **Custom UI needs.** Do you already have a frontend/site this plugs into, or do you want one
    built for you?

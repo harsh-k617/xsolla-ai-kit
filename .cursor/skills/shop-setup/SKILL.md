@@ -35,9 +35,11 @@ case "$raw" in
 esac
 ```
 
-- **`NO_DECISION`** → invoke `shop-plan` and stop. It asks the developer to weigh headless vs.
-  Shop Builder against five criteria, shows the trade-offs, and records the confirmed choice.
-  This orchestrator never asks the path itself.
+- **`NO_DECISION`** → ask the
+  [intake](references/onboarding-contract.md#intake) in one message — it carries `shop-plan`'s
+  criteria — then invoke `shop-plan` to weigh the answers. It shows the trade-offs and records
+  the confirmed choice, then stops; at that same confirmation, write the intake to the ledger.
+  This orchestrator never decides the path itself.
 - **`DECIDED:headless`** → proceed with the rest of this skill as below.
 - **`DECIDED:shopbuilder`** → run the shared foundation below (`merchant-setup`,
   `catalog-design`, `login-setup`), then hand the storefront to exactly one skill:
