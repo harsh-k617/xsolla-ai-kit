@@ -68,7 +68,7 @@ verified stays out of `completed`.
 | `login` | `login-setup` | `XSOLLA_LOGIN_PROJECT_ID` is set and the Login project reads back with the planned methods enabled | Read the Login project |
 | `storefront` | per path | `headless`: the **Validate** line of each of Phases 1–5 in `shop-setup` holds · `shopbuilder`: `shop-builder-assembly`'s structure check passes against the confirmed plan · `portal`: `game-web-portal`'s read-back matches the confirmed plan | The same checks |
 | `webhooks` | `webhooks-impl` | Fixture replay passes: a tampered body is rejected, `user_validation` answers, a replayed order grants once | Replay the fixtures |
-| `verify` | `shop-setup` | Shop Builder and portal: an existing site was backed up before its first write (a new site has nothing to back up), and the site was read back after the last write. Headless: the storefront evidence above | The backup directory, if any, and a fresh read-back |
+| `verify` | `shop-setup` | Shop Builder and portal: an existing site was backed up with `shop-builder-assembly`'s `backup_shop.py` before its first write (a new site has nothing to back up), and the site was read back after the last write. Headless: the storefront evidence above | The backup directory, if any, and a fresh read-back |
 | `review` | the developer | The developer approved the draft, with every placeholder and gap disclosed | The ledger |
 | `production` | the developer | Never set by the agent — the `production` checklist is handed over and the step stays `needs_human` until the developer confirms it | The ledger |
 | `handoff` | `shop-setup` | The report below was rendered from the ledger | — |

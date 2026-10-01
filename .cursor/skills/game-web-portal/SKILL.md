@@ -98,9 +98,12 @@ Verify (read-back) → Human review → Handoff
    are keyed by landing `_id`, not the domain. Never recreate a discovered existing
    entity; resume at the first incomplete item.
 4. **Back up** — before the first write to an existing site (an update or a resume),
-   export it: `get-landing`, `get-structure`, `get-localization`, and `list-assets` for
-   the slug, saved to a new local directory. A failed export stops the run before any
-   write. A brand-new site has nothing to back up.
+   export it with `shop-builder-assembly`'s
+   [`scripts/backup_shop.py`](../shop-builder-assembly/scripts/backup_shop.py)
+   `--merchant-id --project-id --environment` (plus `--approved-test-projects` for a test
+   project) `--slug --output-dir <new dir>`. It runs the same approved-project check and
+   writes a read-only, checksummed export. A failed export stops the run before any write.
+   A brand-new site has nothing to back up.
 5. **Plan and confirm** — show the ordered change groups (sections, pages, blocks,
    theme, copy, catalog links) and the exact removals, then wait for an explicit yes.
    Earlier permission to "set up my portal" is not confirmation of a plan. Re-confirm
