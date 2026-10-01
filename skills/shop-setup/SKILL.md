@@ -56,6 +56,15 @@ esac
 The full contract — allowed values, who may write the key, what other skills must do with it —
 is in [`shop-plan/references/build-path-contract.md`](../shop-plan/references/build-path-contract.md).
 
+## The onboarding flow
+
+Every run, on every path, follows
+[the onboarding contract](references/onboarding-contract.md): one status per step, no
+`completed` without evidence, one ledger in `.xsolla/onboarding.json`, and one handoff
+report at the end. If the ledger already exists, resume as the contract describes before
+anything else — re-read what was done, then continue from the first incomplete step. The
+agent never publishes and never switches to production.
+
 ## What is Headless Shop
 
 A custom game store assembled from individual Xsolla products and integrated
@@ -261,6 +270,9 @@ After a successful payment — whether through Headless Checkout SDK or Pay Stat
 
 **Validate:** developer sign-off on the `production` checklist (utils OK without
 `00020004`, live card + goods granted, wallets smoked, failed path works).
+
+In the onboarding flow this phase is a handoff: give the developer the `production`
+checklist and flip nothing — see the contract's hard stops.
 
 ---
 

@@ -133,14 +133,14 @@ Verify (read-back) → Human review → Handoff
 9. **Handoff** — repeat merchant ID, project ID, domain, locale, and Steam URL only
    when one was supplied, with evidence for every completed item.
 
-Status values: `completed`, `placeholder`, `needs_input`, `needs_access`,
-`needs_human`, `blocked_capability`, `failed`.
+Statuses, the ledger, resume, and the handoff report follow the kit-wide
+[onboarding contract](../shop-setup/references/onboarding-contract.md).
 
 Two references, both loaded before issuing changes:
 
-- [references/agentic-onboarding.md](references/agentic-onboarding.md) — the
-  specification: `GIVEN / WHEN / THEN` acceptance scenarios, the per-state evidence
-  contract, and the handoff report template.
+- [references/agentic-onboarding.md](references/agentic-onboarding.md) — the portal
+  specification: `GIVEN / WHEN / THEN` acceptance scenarios, the portal's per-state
+  evidence, and its section of the handoff report.
 - [references/portal-api.md](references/portal-api.md) — the CLI commands the agent runs
   for Steps 3–8, the portal layout, the domain vs landing `_id` split,
   the localization payload shape, the steps handed to the partner, and the response →
