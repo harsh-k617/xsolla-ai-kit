@@ -19,9 +19,9 @@ The storefront step depends on the recorded build path (see
 
 ## Intake
 
-Every value the flow needs is asked **once, in one message**, at the start of a fresh project —
-together with `shop-plan`'s criteria, so planning asks nothing new. Skip what the developer
-already stated, and show inferred values back instead of assuming them.
+Every value the flow needs is asked **once, in one message**, at the start of a fresh project:
+`shop-plan`'s first message, together with its criteria, so planning asks nothing new. Skip what
+the developer already stated, and show inferred values back instead of assuming them.
 
 | Group | Values | Used by |
 |---|---|---|

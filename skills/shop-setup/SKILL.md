@@ -37,11 +37,12 @@ case "$raw" in
 esac
 ```
 
-- **`NO_DECISION`** → ask the
-  [intake](references/onboarding-contract.md#intake) in one message — it carries `shop-plan`'s
-  criteria — then invoke `shop-plan` to weigh the answers. It shows the trade-offs and records
-  the confirmed choice, then stops; at that same confirmation, write the intake to the ledger.
-  This orchestrator never decides the path itself.
+- **`NO_DECISION`** → invoke `shop-plan` now, before asking anything. Its first message asks
+  the open criteria together with the rest of the
+  [intake](references/onboarding-contract.md#intake), or, when the request already answers the
+  criteria, shows the comparison and recommendation alongside the remaining intake questions.
+  It records the confirmed choice, then stops; at that same confirmation, write the intake to
+  the ledger. This orchestrator never asks the intake itself and never decides the path.
 - **`DECIDED:headless`** → proceed with the rest of this skill as below.
 - **`DECIDED:shopbuilder`** → run the shared foundation below (`merchant-setup`,
   `catalog-design`, `login-setup`), then hand the storefront to exactly one skill:
