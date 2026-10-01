@@ -8,8 +8,9 @@ description: >-
   should I use", "headless or Shop Builder", "should I use Shop Builder or build my own", "what's
   fastest to launch a store", "I want a hosted no-code store", "I want to embed a custom store in
   my app", "compare headless vs Shop Builder", "do I need a Game Web Portal or just a shop",
-  "gather requirements for my shop", or any request to decide the build path before building. Runs with zero Xsolla credentials — `shop-setup` invokes this automatically when no
-  path is recorded in `.env`. Creates no Xsolla resources and writes nothing until the developer
+  "gather requirements for my shop", or any request to decide the build path before building.
+  Runs with zero Xsolla credentials — `shop-setup` invokes this automatically when no path is
+  recorded in `.env`. Creates no Xsolla resources and writes nothing until the developer
   explicitly confirms the recommendation.
 metadata:
   owner: s.sadruddin
@@ -57,7 +58,7 @@ drove it → developer says yes → `XSOLLA_BUILD_PATH=shopbuilder` recorded →
 | Ceiling on custom design | None | Bounded by the block system | Bounded by the block system |
 | Ongoing maintenance | The developer's own frontend | None — Xsolla maintains the UI | None for the UI; the news and rewards content is the developer's |
 
-**Either way, recording the choice is where this skill stops — `shop-setup` does the building.**
+**Whichever path, recording the choice is where this skill stops — `shop-setup` does the building.**
 Headless runs `shop-setup` → `catalog-design`, `login-setup`, `headless-checkout-integration`,
 `webhooks-impl`, `production`. Shop Builder runs the same shared foundation, then hands the
 storefront to `shop-builder-assembly`, and finishes with `webhooks-impl`. Game Web Portal runs the
@@ -71,9 +72,9 @@ same foundation, then hands the storefront to `game-web-portal`, and finishes wi
 ```bash
 raw=$(grep -E '^XSOLLA_BUILD_PATH=' .env 2>/dev/null | tail -n 1 | cut -d= -f2-)
 case "$raw" in
-  "")                   echo NO_DECISION ;;
+  "")                          echo NO_DECISION ;;
   headless|shopbuilder|portal) echo "DECIDED:$raw" ;;
-  *)                    echo "INVALID:$raw" ;;
+  *)                           echo "INVALID:$raw" ;;
 esac
 ```
 
@@ -99,13 +100,13 @@ Full rules, including what every other skill must do with this key:
 [`references/build-path-contract.md`](references/build-path-contract.md).
 
 **Credentials are not a decision.** A project with `XSOLLA_PROJECT_ID` / `XSOLLA_PROJECT_API_KEY`
-in `.env` but no recorded path has an Xsolla project, not a chosen storefront — both paths build on
+in `.env` but no recorded path has an Xsolla project, not a chosen storefront — every path builds on
 the same account and catalog. Ask the six criteria as normal. Say what you can see, so the
 developer knows the account work isn't being redone:
 
 ```
-You already have an Xsolla project configured — that part carries over either way. What's still
-open is how the storefront itself gets built, so six quick questions.
+You already have an Xsolla project configured — that part carries over whichever path you pick.
+What's still open is how the storefront itself gets built, so six quick questions.
 ```
 
 ### 2. Ask the six criteria — one message
@@ -189,14 +190,15 @@ Recorded: headless. Run shop-setup when you're ready to build.
 - **Re-interviewing when `.env` already has a recorded path.** Check first, every time.
 - **Averaging conflicting answers into a guess.** Name the conflict and ask, rather than picking
   the side with more signals.
-- **Reading existing credentials as a path.** An account and a catalog are shared by both paths;
+- **Reading existing credentials as a path.** An account and a catalog are shared by every path;
   only `XSOLLA_BUILD_PATH` records a decision.
 
 ## Known limitations
 
 - **Only the build path is planned.** Catalog and images/themes are not gathered here yet.
-- **Only `shop-setup` checks the recorded path.** No other skill reads it, so invoking one directly
-  (e.g. `headless-checkout-integration` on a `shopbuilder` project) isn't stopped.
+- **Only `shop-setup` and `game-web-portal` check the recorded path.** No other skill reads it, so
+  invoking one directly (e.g. `headless-checkout-integration` on a `shopbuilder` project) isn't
+  stopped.
 - **The step 1 and step 5 snippets are compound shell commands**, so Claude Code may ask the
   developer to approve them.
 

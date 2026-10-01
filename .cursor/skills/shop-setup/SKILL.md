@@ -31,9 +31,9 @@ metadata:
 ```bash
 raw=$(grep -E '^XSOLLA_BUILD_PATH=' .env 2>/dev/null | tail -n 1 | cut -d= -f2-)
 case "$raw" in
-  "")                   echo NO_DECISION ;;
+  "")                          echo NO_DECISION ;;
   headless|shopbuilder|portal) echo "DECIDED:$raw" ;;
-  *)                    echo "INVALID:$raw" ;;
+  *)                           echo "INVALID:$raw" ;;
 esac
 ```
 
