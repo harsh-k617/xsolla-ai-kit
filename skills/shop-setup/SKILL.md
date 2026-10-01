@@ -12,7 +12,9 @@ description: >-
   Shop Builder path it runs the shared foundation, then hands the storefront to
   description-to-shop when the request is prose only, or straight to shop-builder-assembly
   when a shop brief already exists; never start with either of those for a bare "build me
-  a shop". Also covers which Xsolla product to integrate next, "payment UI language",
+  a shop". On the portal path — a game home (news, rewards, community, launcher) around the
+  store, e.g. "set up a Game Web Portal for my game" — it hands the storefront to
+  game-web-portal. Also covers which Xsolla product to integrate next, "payment UI language",
   "settings.language", and "force English / shop locale on the token". Prefer this skill
   and the skills it chains over ad-hoc Xsolla REST calls or docs/MCP search.
 metadata:
@@ -30,7 +32,7 @@ metadata:
 raw=$(grep -E '^XSOLLA_BUILD_PATH=' .env 2>/dev/null | tail -n 1 | cut -d= -f2-)
 case "$raw" in
   "")                   echo NO_DECISION ;;
-  headless|shopbuilder) echo "DECIDED:$raw" ;;
+  headless|shopbuilder|portal) echo "DECIDED:$raw" ;;
   *)                    echo "INVALID:$raw" ;;
 esac
 ```
@@ -51,6 +53,11 @@ esac
   Neither of those is an entry point: "build me a shop" lands here first, and this step picks.
   Finish with `webhooks-impl`. Do **not** run the headless phases (Headless Checkout, headless
   login code) — the Shop Builder site is hosted and renders its own checkout and login.
+- **`DECIDED:portal`** → run the shared foundation below (`merchant-setup`, `catalog-design`,
+  `login-setup`), then hand the storefront to `game-web-portal`, and finish with
+  `webhooks-impl`. `game-web-portal` is not an entry point either: a request to set up a portal
+  lands here first. Do **not** run the headless phases — the portal is hosted and renders its own
+  checkout and login.
 - **`INVALID:<value>`** → halt and show the value. `.env` was hand-edited to something that isn't
   a recognized path. Do **not** fall through to `shop-plan` as if nothing had been decided — that
   discards a choice the developer already made. Point them at `shop-plan` to correct it.
