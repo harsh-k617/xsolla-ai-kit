@@ -92,7 +92,7 @@ verified stays out of `completed`.
       "id": "merchant",
       "status": "completed",
       "evidence": ["XSOLLA_PROJECT_ID set in .env", "project read: 200"],
-      "ids": { "merchant_id": 0, "project_id": 0 },
+      "ids": { "merchant_id": 0, "project_id": 0, "environment": "test" },
       "updated_at": "2026-01-01T00:00:00Z"
     }
   ]
@@ -101,7 +101,10 @@ verified stays out of `completed`.
 
 Update the step's entry after every step, including a `failed` or `needs_*` one, with the
 reason in `evidence`. `ids` holds what later steps and a resume need: project, Login
-project, SKUs, site slug and landing `_id`, page IDs.
+project, SKUs, site slug and landing `_id`, page IDs, and which of those pages the agent
+created. The `merchant` step records the merchant, project and environment (`sandbox` or
+`test`); together they let a resumed run tell its own pages from the partner's, as
+`game-web-portal` requires before it removes seeded blocks.
 
 ## Resume
 
