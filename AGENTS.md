@@ -10,6 +10,9 @@ This file is read automatically by most AI coding agents (Cursor, Codex CLI, Git
 
 Skills call **Xsolla REST APIs directly**. The CLI (`xsolla/xsolla-cli`) is an optional shortcut once it ships to production.
 
+`catalog-design` also supports the **Xsolla API MCP** with REST fallback; the separate
+**Xsolla Docs MCP** (kapa) supplies documentation, not API execution.
+
 ---
 
 ## Skill inventory
@@ -18,7 +21,7 @@ Skills call **Xsolla REST APIs directly**. The CLI (`xsolla/xsolla-cli`) is an o
 |---------------------------------|------------------------------------------------------------------------------------------|
 | `shop-setup`                    | **Orchestrator** — coordinates the full zero-to-shop flow, chaining all domain skills    |
 | `merchant-setup`                | Creates and configures an Xsolla account + get API key                                   |
-| `catalog-design`                | Configures the catalog and the client flow: client catalog, purchase, order confirmation |
+| `catalog-design`                | Configures the catalog and the client flow: client catalog, purchase, order confirmation (REST or Xsolla API MCP) |
 | `login-setup`                   | Integrates Xsolla Login / NewID authentication                                           |
 | `login-styling`                 | Applies a custom visual style / theme / brand to the Login UI (pairs with `login-setup`) |
 | `headless-checkout-integration` | Payments via Headless Checkout                                                           |
@@ -36,6 +39,9 @@ Set up a full Xsolla game shop for my project
 → triggers: shop-setup
 
 Configure my Xsolla catalog with items and pricing
+→ triggers: catalog-design
+
+Configure my catalog using the Xsolla API MCP with REST fallback
 → triggers: catalog-design
 
 Integrate payments into my game
