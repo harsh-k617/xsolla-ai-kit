@@ -64,7 +64,8 @@ export XSOLLA_PROJECT_API_KEY=<your API key>
 "Xsolla MCP" in this skill mean Docs MCP. **Xsolla API MCP** (`xsolla-mcp`) executes
 API operations; connect the Xsolla API MCP your organization provides. Keep REST
 available for missing operations or differences in routes, auth, or required fields.
-API MCP uses `XSOLLA_API_KEY` for the project key; player calls need a player token.
+API MCP reads `XSOLLA_API_KEY`, `XSOLLA_MERCHANT_ID` and `XSOLLA_PROJECT_ID`
+from its own configuration (not `XSOLLA_PROJECT_API_KEY`); player calls need a player token.
 
 Read [references/api-mcp.md](references/api-mcp.md) for the operation table, search queries and known REST fallbacks before using the API MCP.
 Set `is_show_in_store: true` on items and bundles intended for the storefront, even if the API MCP schema does not list it.

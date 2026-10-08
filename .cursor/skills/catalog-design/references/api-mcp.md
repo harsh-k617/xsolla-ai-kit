@@ -20,6 +20,8 @@ Known gaps — use the documented REST calls in the companion reference files:
   (`admin-import-catalog`) differ from the public REST routes as of October 2026
   (compare with the [published Catalog OpenAPI](https://developers.xsolla.com/_bundle/api/catalog/index.json?download));
   use REST for them until a newer API MCP release says otherwise.
+- Item attributes, pre-order limits and per-user item limit operations also use
+  route shapes that differ from the public API as of October 2026; use REST for them.
 - Catalog group update/delete are missing. Merchant `groups_update`/`groups_delete`
   use another route and numeric IDs; use Catalog REST with `external_id` instead.
   `admin-grant-entitlement`/`admin-revoke-entitlement` advertise different bodies from
