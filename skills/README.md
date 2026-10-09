@@ -11,7 +11,7 @@ Each subdirectory contains a `SKILL.md` — a structured workflow file for an Xs
 | [`shop-builder-assembly`](shop-builder-assembly/SKILL.md)                 | Shop Builder site assembly              | @k.shah             | Draft  |
 | [`description-to-shop`](description-to-shop/SKILL.md)                     | Description → Shop Builder shop brief   | @k.shah             | Draft  |
 | [`merchant-setup`](merchant-setup/SKILL.md)                               | Merchant and Project setup              | @y.klochikhin       | Done   |
-| [`catalog-design`](catalog-design/SKILL.md)                               | Items, purchase & order tracking (REST or API MCP)        | @p.sanachev         | Draft  |
+| [`catalog-design`](catalog-design/SKILL.md)                               | Items, purchase & order tracking        | @p.sanachev         | Draft  |
 | [`login-setup`](login-setup/SKILL.md)                                     | Login / NewID / auth                    | @mohammed_abujalala | Draft  |
 | [`login-styling`](login-styling/SKILL.md)                                 | Login UI theming / branding             | @a.springut         | Draft  |
 | [`headless-checkout-integration`](headless-checkout-integration/SKILL.md) | Payments via Headless Checkout          | @y.klochikhin       | Done   |

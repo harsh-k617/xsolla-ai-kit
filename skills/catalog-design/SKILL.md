@@ -57,30 +57,8 @@ export XSOLLA_PROJECT_API_KEY=<your API key>
   docs, not from this file. If the MCP is unavailable, fetch the linked
   developers.xsolla.com pages.
 
-## MCP execution path (REST fallback)
-
-**Xsolla Docs MCP** is kapa: use its advertised `search_xsolla_sources` or
-`search_xsolla_knowledge_sources` tool for documentation. Existing references to
-"Xsolla MCP" in this skill mean Docs MCP. **Xsolla API MCP** (`xsolla-mcp`) executes
-API operations; connect the Xsolla API MCP your organization provides. Keep REST
-available for missing operations or differences in routes, auth, or required fields.
-API MCP reads `XSOLLA_API_KEY`, `XSOLLA_MERCHANT_ID` and `XSOLLA_PROJECT_ID`
-from its own configuration (not `XSOLLA_PROJECT_API_KEY`); player calls need a player token.
-
-Read [references/api-mcp.md](references/api-mcp.md) for the operation table, search queries and known REST fallbacks before using the API MCP.
-Set `is_show_in_store: true` on items and bundles intended for the storefront, even if the API MCP schema does not list it.
-
-When `search_operations` is available, use the referenced query and `product`, or search
-for an exact operation ID. Pass the returned name to `describe_operation`; inspect
-its schema, auth, warnings, and `requiresConfirm`. Single-product names are unprefixed;
-multi-product names use `catalog__` or `webshop__`. A product filter does not remove
-that prefix. Use the exact advertised name, including its punctuation.
-
-Use `invoke_operation` for `requiresConfirm: false`; use `invoke_change` for
-`requiresConfirm: true`, with `{operation, arguments}` and `arguments.confirm: true`
-beside `arguments.body` for an authorized change. The documented writes require confirm;
-GETs do not. If only direct tools are exposed, use their advertised schemas and put
-`confirm: true` at the top level beside `body`. Discovery does not authorize a write.
+If an [Xsolla API MCP](https://github.com/xsolla/xsolla-mcp) is connected, prefer it
+for the Admin API calls in step 1 (reads and creates); otherwise use REST as documented.
 
 ## Steps
 
@@ -91,6 +69,7 @@ GETs do not. If only direct tools are exposed, use their advertised schemas and 
    `references/game-keys.md`. Admin calls use basic auth
    (`XSOLLA_MERCHANT_ID:XSOLLA_PROJECT_API_KEY`); verify each request body via the
    Xsolla MCP first.
+   Set `is_show_in_store: true` on items and bundles intended for the storefront.
 
 2. **Set up pricing.** Recommend regional prices in local currencies for key markets
    via the `prices` array; keep the currency list and default currency identical across
@@ -153,5 +132,3 @@ consumable booster priced in VC, 2 VC packages, and a per-user-limited starter b
 (`201`, not paid); then deleted every created entity (`204`, verified empty). Steps
 requiring a user JWT (fast purchase, VC purchase, Get order/WebSocket) were planned and
 documented as blocked: no Login on the fixture project. ✅
-
-MCP-aware validation (2026-10-07): one sandbox run created and read back all eight expected catalog entities, including a visible starter bundle, with no observed wrong-operation calls. Payment completion, player-authenticated purchases and live webhooks were not tested.
